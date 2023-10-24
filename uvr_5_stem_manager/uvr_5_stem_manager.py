@@ -28,7 +28,7 @@ def mkdirs_replace_and_delete_old_dirs(extention):
 
     # создание каталогов
     ls_dst_dirs = []
-    for full_path in ls_files[:]:  # СНЯТЬ ОГРАНИЧЕНИЕ!
+    for full_path in ls_files[:]:
         # Преобразуйте полный путь в объект Path
         path = Path(full_path)
         # Извлеките имя файла без расширения
