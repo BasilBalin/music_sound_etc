@@ -5,8 +5,6 @@
 import os
 import glob
 from pathlib import Path
-import tkinter as tk
-from tkinter import filedialog
 
 
 dict_constants = {
@@ -16,25 +14,6 @@ dict_constants = {
     'dir_mask': 'Ensembled_Outputs_*', 
     '': r'', 
 }
-
-
-def get_dir_from_gui(initial_directory):
-    # Создается объект графического интерфейса Tkinter, представляющий основное окно для диалогового окна.
-    root = tk.Tk()
-    # Устанавливается атрибут окна Tkinter, чтобы оно оставалось поверх других окон. Это делает окно верхним по отношению ко всем остальным окнам.
-    root.wm_attributes('-topmost', True)
-    # Основное окно Tkinter временно скрывается, так как оно не будет отображаться, но останется активным для обработки событий.
-    root.withdraw()
-
-    # Вызывается диалоговое окно для выбора директории
-    initial_dir = filedialog.askdirectory(initialdir=initial_directory, 
-                                        title=f'Choose your directory which contains stems and "Ensembled_Outputs_*" catalogues', 
-                                        )
-        
-    # Основное окно Tkinter разрушается, завершая работу графического интерфейса Tkinter.
-    root.destroy()
-
-    return initial_dir
 
 
 def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
@@ -83,10 +62,7 @@ def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
 
 def main():
 
-    # k = 'initial_dir'
-    # initial_dir = dict_constants[k]
-
-    initial_dir = get_dir_from_gui(Path(__file__).parents[1].resolve())
+    initial_dir = Path(__file__).parent.resolve()
 
     for ext in ['shared_ending_1', 'shared_ending_2', 'shared_ending_3', ]:
         mkdirs_replace_and_delete_old_dirs(ext, initial_dir)
