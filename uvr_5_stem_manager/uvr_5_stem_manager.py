@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-
 
 
-import os
 import glob
+import platform
 from pathlib import Path
+import os
 
 
 dict_constants = {
@@ -16,11 +17,21 @@ dict_constants = {
 }
 
 
+if platform.system() == 'Windows':
+    sys = 0
+elif platform.system() in ['Darwin', 'Linux']:
+    sys = 1
+else:
+    sys = 1
+
+slashes = ['\\', '/', ]
+
+
 def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
 
     k_ending = extention
     # Список полных путей к файлам
-    ls_files = glob.glob(rf'{initial_dir}\{dict_constants[k_ending]}')
+    ls_files = glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k_ending]}')
 
     if len(ls_files) > 0:
         # создание каталогов
@@ -31,7 +42,7 @@ def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
             # Извлеките имя файла без расширения
             file_name_without_extension = path.stem
             # создаём папку с названием как у файла
-            dst_dir = rf'{initial_dir}\{file_name_without_extension}'
+            dst_dir = rf'{initial_dir}{slashes[sys]}{file_name_without_extension}'
             if not os.path.exists(dst_dir):
                 os.mkdir(dst_dir)
             ls_dst_dirs.append(dst_dir)
@@ -40,7 +51,7 @@ def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
 
             # поиск и перемещение файлов
             k = 'dir_mask'
-            for full_path in glob.glob(rf'{initial_dir}\{dict_constants[k_ending]}') + glob.glob(rf'{initial_dir}\{dict_constants[k]}\{dict_constants[k_ending]}'):
+            for full_path in glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k_ending]}') + glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k]}{slashes[sys]}{dict_constants[k_ending]}'):
 
                 for f_type in ["_(Vocals)", "_(Instrumental)", ]:
                     
@@ -50,13 +61,13 @@ def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
                         # Путь к исходному файлу
                         src = Path(full_path)
                         # Путь, куда нужно переместить (переименовать) файл
-                        dst = Path(rf'{dst_dir}\{src.name}')
+                        dst = Path(rf'{dst_dir}{slashes[sys]}{src.name}')
                         # Перемещаем (переименовываем) файл
                         src.rename(dst)
 
         # удалим лишние папки
-        for dir_to_delete in glob.glob(rf'{initial_dir}\{dict_constants[k]}'):
-            if len(glob.glob(rf'{dir_to_delete}\*.*')) == 0:
+        for dir_to_delete in glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k]}'):
+            if len(glob.glob(rf'{dir_to_delete}{slashes[sys]}*.*')) == 0:
                 os.rmdir(dir_to_delete)
 
 
