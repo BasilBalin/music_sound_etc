@@ -9,16 +9,14 @@ import os
 
 
 dict_constants = {
-    'shared_ending_1': '*.mp3',
-    'shared_ending_2': '*.flac',
-    'shared_ending_3': '*.wav',
-    'dir_mask': [
-        'Ensembled_Outputs_*',
-        'Drums_No_Drums_Outputs_*',
-        ],
-    '': r'',
+    'shared_ending_1': '*.mp3', 
+    'shared_ending_2': '*.flac', 
+    'shared_ending_3': '*.wav', 
+    'dir_mask': '*_Outputs_*', 
+    '': r'', 
 }
 
+# todo: добавить остальные возможные пары стемов
 ls_stem_pairs = [
     ["_(Vocals)", "_(Instrumental)", ],
     ["_(Drums)", "_(No Drums)", ],
@@ -61,26 +59,24 @@ def mkdirs_replace_and_delete_old_dirs(extention, initial_dir):
 
                 # поиск и перемещение файлов
                 k = 'dir_mask'
-                for dir_mask in dict_constants[k]:
-                    for full_path in glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k_ending]}') + glob.glob(rf'{initial_dir}{slashes[sys]}{dir_mask}{slashes[sys]}{dict_constants[k_ending]}'):
+                for full_path in glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k_ending]}') + glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k]}{slashes[sys]}{dict_constants[k_ending]}'):
 
-                        for f_type in stem_pair:
+                    for f_type in stem_pair:
+                        
+                        full_path_by_f_type = full_path.split(f_type)
 
-                            full_path_by_f_type = full_path.split(f_type)
-
-                            if len(full_path_by_f_type) > 1 and f_type in dst_dir and Path(dst_dir).name.split(f_type)[0] in full_path:
-                                # Путь к исходному файлу
-                                src = Path(full_path)
-                                # Путь, куда нужно переместить (переименовать) файл
-                                dst = Path(rf'{dst_dir}{slashes[sys]}{src.name}')
-                                # Перемещаем (переименовываем) файл
-                                src.rename(dst)
+                        if len(full_path_by_f_type) > 1 and f_type in dst_dir and Path(dst_dir).name.split(f_type)[0] in full_path:
+                            # Путь к исходному файлу
+                            src = Path(full_path)
+                            # Путь, куда нужно переместить (переименовать) файл
+                            dst = Path(rf'{dst_dir}{slashes[sys]}{src.name}')
+                            # Перемещаем (переименовываем) файл
+                            src.rename(dst)
 
         # удалим лишние папки
-        for dir_mask in dict_constants[k]:
-            for dir_to_delete in glob.glob(rf'{initial_dir}{slashes[sys]}{dir_mask}'):
-                if len(glob.glob(rf'{dir_to_delete}{slashes[sys]}*.*')) == 0:
-                    os.rmdir(dir_to_delete)
+        for dir_to_delete in glob.glob(rf'{initial_dir}{slashes[sys]}{dict_constants[k]}'):
+            if len(glob.glob(rf'{dir_to_delete}{slashes[sys]}*.*')) == 0:
+                os.rmdir(dir_to_delete)
 
 
 def main():
