@@ -385,7 +385,7 @@ def how_much_to_pitch_shift_the_second_track(first_key, second_key):
     else:
         tup_avaible_keys = (0, )
 
-    for result_shift in (0, -1, +1, -2, +2, +3, +4, ):
+    for result_shift in (0, -1, +1, -2, +2, -3, +3, -4, +4, -5, +5, ):
         for avaible_key in tup_avaible_keys:
             if shift_n_base_12(second_key, avaible_key,
                                result_shift * -5)[:-1] == first_key[:-1]:
