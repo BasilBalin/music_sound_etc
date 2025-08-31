@@ -89,7 +89,7 @@ dict_lat = {
                                                                   'gis',
                                                                   'a',
                                                                   'ais',
-                                                                  'b'
+                                                                  'h'
                                                                   ),
                                                 },
                         'dict_flat_dur_moll': {'ls_dur_flat': (
@@ -103,8 +103,8 @@ dict_lat = {
                                                                'G',
                                                                'As',
                                                                'A',
-                                                               'Bes',
                                                                'B',
+                                                               'H',
                                                                ),
                                                'ls_moll_flat': (
                                                                  'c',
@@ -117,8 +117,8 @@ dict_lat = {
                                                                  'g',
                                                                  'as',
                                                                  'a',
-                                                                 'bes',
                                                                  'b',
+                                                                 'h',
                                                                  ),
                                                }, },
                 }
@@ -150,7 +150,7 @@ dict_pitch_classes = {
                                                                   'g#',
                                                                   'a',
                                                                   'a#',
-                                                                  'b'),
+                                                                  'h'),
 
                                                 },
                         'dict_flat_dur_moll': {'ls_dur_flat': (
@@ -164,8 +164,8 @@ dict_pitch_classes = {
                                                                'G',
                                                                'Ab',
                                                                'A',
-                                                               'Bb',
-                                                               'B'
+                                                               'B',
+                                                               'H'
                                                                ),
                                                'ls_moll_flat': (
                                                                 'c',
@@ -178,8 +178,8 @@ dict_pitch_classes = {
                                                                 'g',
                                                                 'ab',
                                                                 'a',
-                                                                'bb',
-                                                                'b'
+                                                                'b',
+                                                                'h'
                                                                 ),
 
                                                }, },
@@ -201,9 +201,6 @@ dict_camelot = {
                                                                  '1B',
                                                                  ),
                                                 'ls_moll_sharp': (
-                                                                  '8A',
-                                                                  '3A',
-                                                                  '10A',
                                                                   '5A',
                                                                   '12A',
                                                                   '7A',
@@ -213,6 +210,9 @@ dict_camelot = {
                                                                   '11A',
                                                                   '6A',
                                                                   '1A',
+                                                                  '8A',
+                                                                  '3A',
+                                                                  '10A',
                                                                   ),
                                                 },
                         'dict_flat_dur_moll': {'ls_dur_flat': (
@@ -230,18 +230,18 @@ dict_camelot = {
                                                                '1B',
                                                                ),
                                                'ls_moll_flat': (
-                                                                '8A',
-                                                                None,
-                                                                '10A',
                                                                 '5A',
-                                                                '12A',
-                                                                '7A',
                                                                 None,
+                                                                '7A',
+                                                                '2A',
                                                                 '9A',
                                                                 '4A',
-                                                                '11A',
+                                                                None,
                                                                 '6A',
                                                                 '1A',
+                                                                '8A',
+                                                                '3A',
+                                                                '10A',
                                                                 ),
                                                }, },
                 }
